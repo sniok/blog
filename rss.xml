@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[My blog]]></title><description><![CDATA[Blog about js, reason and react.]]></description><link>https://blog.dubenko.dev/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 21 Apr 2019 11:56:12 GMT</lastBuildDate><item><title><![CDATA[ReasonML by example]]></title><description><![CDATA[Hi I really want to share with you about this magnificent language  ReasonML . Before we start let me tell you that this is a gentle…]]></description><link>https://blog.dubenko.dev//reasonml-by-example/</link><guid isPermaLink="false">https://blog.dubenko.dev//reasonml-by-example/</guid><pubDate>Sun, 21 Apr 2019 11:07:16 GMT</pubDate><content:encoded>&lt;h2&gt;Hi&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[My blog]]></title><description><![CDATA[Blog about js, reason and react.]]></description><link>https://blog.dubenko.dev/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 21 Apr 2019 12:32:31 GMT</lastBuildDate><item><title><![CDATA[ReasonML by example]]></title><description><![CDATA[Hi I really want to share with you about this magnificent language  ReasonML . Before we start let me tell you that this is a gentle…]]></description><link>https://blog.dubenko.dev//reasonml-by-example/</link><guid isPermaLink="false">https://blog.dubenko.dev//reasonml-by-example/</guid><pubDate>Sun, 21 Apr 2019 11:07:16 GMT</pubDate><content:encoded>&lt;h2&gt;Hi&lt;/h2&gt;
 &lt;p&gt;I really want to share with you about this magnificent language &lt;a href=&quot;https://reasonml.github.io/&quot;&gt;ReasonML&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Before we start let me tell you that this is a gentle introduction for people mainly coming from javascript beackground (like me). I’m by no means an expert in reason or functional programming and if you are serious about learning reason you should checkout out (after reading this post of course) &lt;a href=&quot;https://reasonml.github.io/docs/en/what-and-why&quot;&gt;official documentation&lt;/a&gt; and &lt;a href=&quot;http://reasonmlhub.com/exploring-reasonml/toc.html&quot;&gt;awesome book by Dr Axel Rauschmayer&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Intro&lt;/h2&gt;
@@ -33,7 +33,7 @@ You can probably already read it just fine. It looks just like js. (for a &lt;em
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/blog/static/43b632815a9aac05024873e4495e98c1/b6db4/quadtree.png&quot;
+    href=&quot;/static/43b632815a9aac05024873e4495e98c1/b6db4/quadtree.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -52,13 +52,13 @@ You can probably already read it just fine. It looks just like js. (for a &lt;em
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;quadtree&quot;
         title=&quot;&quot;
-        src=&quot;/blog/static/43b632815a9aac05024873e4495e98c1/b9e4f/quadtree.png&quot;
-        srcset=&quot;/blog/static/43b632815a9aac05024873e4495e98c1/cf440/quadtree.png 148w,
-/blog/static/43b632815a9aac05024873e4495e98c1/d2d38/quadtree.png 295w,
-/blog/static/43b632815a9aac05024873e4495e98c1/b9e4f/quadtree.png 590w,
-/blog/static/43b632815a9aac05024873e4495e98c1/f9b6a/quadtree.png 885w,
-/blog/static/43b632815a9aac05024873e4495e98c1/2d849/quadtree.png 1180w,
-/blog/static/43b632815a9aac05024873e4495e98c1/b6db4/quadtree.png 1331w&quot;
+        src=&quot;/static/43b632815a9aac05024873e4495e98c1/b9e4f/quadtree.png&quot;
+        srcset=&quot;/static/43b632815a9aac05024873e4495e98c1/cf440/quadtree.png 148w,
+/static/43b632815a9aac05024873e4495e98c1/d2d38/quadtree.png 295w,
+/static/43b632815a9aac05024873e4495e98c1/b9e4f/quadtree.png 590w,
+/static/43b632815a9aac05024873e4495e98c1/f9b6a/quadtree.png 885w,
+/static/43b632815a9aac05024873e4495e98c1/2d849/quadtree.png 1180w,
+/static/43b632815a9aac05024873e4495e98c1/b6db4/quadtree.png 1331w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
