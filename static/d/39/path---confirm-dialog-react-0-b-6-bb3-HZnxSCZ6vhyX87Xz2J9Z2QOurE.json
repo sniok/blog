@@ -1,0 +1,1 @@
+{"errors":[{"message":"Cannot query field \"description\" on type \"MdxFrontmatter\".","locations":[{"line":21,"column":7}]}],"pageContext":{"isCreatedByStatefulCreatePages":false,"slug":"/confirm-dialog-react/","previous":{"fields":{"slug":"/typescript-vs-reason/"},"frontmatter":{"title":"TypeScript vs ReasonML – A Comparison"},"code":{"scope":""}},"next":null}}

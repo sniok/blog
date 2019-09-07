@@ -1,0 +1,1 @@
+{"errors":[{"message":"Cannot query field \"description\" on type \"MdxFrontmatter\".","locations":[{"line":21,"column":7}]}],"pageContext":{"isCreatedByStatefulCreatePages":false,"slug":"/reasonml-by-example/","previous":null,"next":{"fields":{"slug":"/life-after-google/"},"frontmatter":{"title":"Life After Google — Map For Your Web App"},"code":{"scope":""}}}}
