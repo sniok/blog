@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-
+import Twitter from "./twitter"
 import { rhythm, scale } from "../utils/typography"
 
 class Layout extends React.Component {
@@ -11,12 +11,14 @@ class Layout extends React.Component {
 
     if (location.pathname === rootPath) {
       header = (
-        <h1
+        <h3
           style={{
-            ...scale(1),
             marginBottom: rhythm(1.5),
             marginTop: 0,
-            fontWeight: 600,
+            fontWeight: 700,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Link
@@ -29,15 +31,18 @@ class Layout extends React.Component {
           >
             {title}
           </Link>
-        </h1>
+          <Twitter />
+        </h3>
       )
     } else {
       header = (
         <h3
           style={{
-            fontFamily: `Montserrat, sans-serif`,
             marginTop: 0,
             fontWeight: 600,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Link
@@ -45,11 +50,13 @@ class Layout extends React.Component {
               boxShadow: `none`,
               textDecoration: `none`,
               color: `inherit`,
+              fontWeight: 700,
             }}
             to={`/`}
           >
             {title}
           </Link>
+          <Twitter />
         </h3>
       )
     }

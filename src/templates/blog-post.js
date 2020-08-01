@@ -5,11 +5,13 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import MDXRenderer from "gatsby-mdx/mdx-renderer"
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = this.props.data.markdownRemark
+    const post = this.props.data.mdx
     const siteTitle = this.props.data.site.siteMetadata.title
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl
     const { previous, next } = this.props.pageContext
 
     return (
@@ -17,18 +19,30 @@ class BlogPostTemplate extends React.Component {
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
+          image={
+            post.frontmatter.thumbnail !== null
+              ? `${siteUrl}${post.frontmatter.thumbnail.publicURL}`
+              : undefined
+          }
         />
         <h1>{post.frontmatter.title}</h1>
         <p
           style={{
             ...scale(-1 / 5),
             display: `block`,
-            marginBottom: rhythm(1),
+            marginBottom: rhythm(2),
             marginTop: rhythm(-1),
+            paddingBottom: rhythm(0.75),
+            borderBottom: "1px solid #121212",
           }}
         >
           {post.frontmatter.date}
         </p>
+        <div>
+          <MDXRenderer scope={this.props.__mdxScope}>
+            {post.code.body}
+          </MDXRenderer>
+        </div>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
           style={{
@@ -69,21 +83,29 @@ class BlogPostTemplate extends React.Component {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query($slug: String!) {
     site {
       siteMetadata {
         title
         author
+        siteUrl
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
+    mdx(fields: { slug: { eq: $slug } }) {
       excerpt(pruneLength: 160)
-      html
+      code {
+        body
+      }
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        thumbnail {
+          publicURL
+        }
       }
     }
   }

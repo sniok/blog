@@ -1,0 +1,168 @@
+---
+title: Imperative confirm dialog in React
+date: "2019-09-07T11:07:16.785Z"
+description: Maybe declarative approach is not always the best
+---
+
+[Demo + Code](https://codesandbox.io/s/jolly-meadow-gb2dz)
+
+I love the simplicity of the `window.confirm` function, it provides a concise way to get a yes/no answer from a user.
+
+```tsx
+const answer = window.confirm("Delete item?")
+// > answer
+// true
+```
+
+You don't have to manage `isOpen` state or anything like that.
+
+Most of the time declarative approach fits solving UI problems better. But I think that confirm dialog is not one of them.
+
+While `window.confirm` gets jobe done, it supports little customization and it's up to browser to style that dialog.
+
+I wanted to make a similar flow but without compromising on customization ability.
+
+Let's start by figuring out how the signature of that function would look like.
+
+Lately, I found the approach of writing out types of the functions before writing implementation to be very helpful.
+
+```tsx
+const customConfirm = (DialogContent): boolean => {
+  /*...*/
+}
+```
+
+I want to pass a react component that will be displayed and as a return value I want to get an answer value.
+
+For this example let's limit the answer type to boolean true/false.
+
+This looks fine but right now this function signature appears to be synchronous (just like `window.confirm`) which means
+that the main thread will be blocked starting from the moment the dialog opens and until the answer is given.
+
+We can improve it by making the function return a Promise.
+
+```tsx
+const customConfirm = (DialogContent): Promise<boolean> => {
+  // highlight-line
+  /*...*/
+}
+```
+
+Also, we need to have the ability to give the answer (duh) from `DialogContent` component, so let's specify that also.
+
+```tsx
+const customConfirm = (DialogContent: (props: {
+  giveAnswer: (answer: boolean) => void // highlight-line
+}): Promise<boolean> => {
+  /*...*/
+}
+```
+
+We'll pass `giveAnswer` function as a prop to that component
+
+And now the implementation:
+
+```tsx
+import * as React from "react"
+import * as ReactDOM from "react-dom"
+
+const confirmRoot = document.createElement("div") // highlight-line
+const body = document.querySelector("body") // highlight-line
+body.appendChild(confirmRoot) // highlight-line
+
+const customConfirm = (
+  DialogContent: (props: {
+    giveAnswer: (answer: boolean) => void
+  }) => React.ReactElement
+): Promise<boolean> =>
+  new Promise(res => {
+    const giveAnswer = (answer: boolean) => {
+      ReactDOM.unmountComponentAtNode(confirmRoot)
+      res(answer)
+    }
+
+    ReactDOM.render(<DialogContent giveAnswer={giveAnswer} />, confirmRoot)
+  })
+```
+
+We start from creating a DOM element `confirmRoot` where we will render our confirm dialog and appending it to the body.
+
+```tsx
+import * as React from "react"
+import * as ReactDOM from "react-dom"
+
+const confirmRoot = document.createElement("div") // highlight-line
+const body = document.querySelector("body") // highlight-line
+body.appendChild(confirmRoot) // highlight-line
+
+const customConfirm = (
+  DialogContent: (props: {
+    giveAnswer: (answer: boolean) => void
+  }) => React.ReactElement
+): Promise<boolean> =>
+  new Promise(res => {
+    const giveAnswer = (answer: boolean) => {
+      ReactDOM.unmountComponentAtNode(confirmRoot)
+      res(answer)
+    }
+
+    ReactDOM.render(<DialogContent giveAnswer={giveAnswer} />, confirmRoot)
+  })
+```
+
+Next, we define `giveAnswer` function that will accept answer from `DialogContent` content, close dialog and then return the given answer.
+
+```tsx
+import * as React from "react"
+import * as ReactDOM from "react-dom"
+
+const confirmRoot = document.createElement("div")
+const body = document.querySelector("body")
+body.appendChild(confirmRoot)
+
+const customConfirm = (
+  DialogContent: (props: {
+    giveAnswer: (answer: boolean) => void
+  }) => React.ReactElement
+): Promise<boolean> =>
+  new Promise(res => {
+    const giveAnswer = (answer: boolean) => {
+      ReactDOM.unmountComponentAtNode(confirmRoot)
+      res(answer)
+    }
+
+    ReactDOM.render(<DialogContent giveAnswer={giveAnswer} />, confirmRoot) // highlight-line
+  })
+```
+
+And finally, we need to render given dialog to the root created just above.
+
+And now let's see the usage of this `customConfirm` function we just wrote
+
+```tsx
+const ConfirmDialog = ({ giveAnswer }) => (
+  <div className="ConfirmDialog">
+    <button onClick={() => giveAnswer(true)}>Yes</button>
+    <button onClick={() => giveAnswer(false)}>No</button>
+  </div>
+)
+
+function App() {
+  const deleteItem = async () => {
+    const answer = await customConfirm(ConfirmDialog) // highlight-line
+    console.log("Your answer is", answer)
+  }
+
+  return (
+    <div className="App">
+      <button onClick={deleteItem}>Delete item</button>
+    </div>
+  )
+}
+```
+
+And now we have a function that has a similar behavior as `window.confirm` but with great customizability.
+
+The code and demo is available in [this sandbox](https://codesandbox.io/s/jolly-meadow-gb2dz)
+
+Thanks for reading :)

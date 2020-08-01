@@ -1,0 +1,143 @@
+---
+title: ReasonML Cheatsheet
+date: "2019-12-31T11:07:16.785Z"
+description: yeye
+---
+
+Implementations are in `.re` files, interfaces are in `.rei` files.
+
+Comments are in `/* */`
+
+## Data Types
+
+```reason
+/* unit */
+let _: unit = (); /* only has one value () */
+
+/* integer: 10, 10_100, 0x123F, 0o567, 0b101 */
+let i: int = 1;
+
+/* float: 0.1, -1.123e-12 */
+let f: float = 1.23;
+
+/* boolean: true or false */
+let b: bool = true;
+
+/* a single ASCII character */
+let c: char = 'A';
+
+/* strings of chars: 'a', '\255', '\xFF', '\n' */
+let s: string = "hello";
+
+/* list of elements */
+let l: list(int) = [1,2,3];
+
+/* array of elements */
+let a: array(int) = [|1,2,3|];
+
+/* tuple */
+let t: (int, char) = (1, 'A');
+```
+
+Note: 'a is a type parameter like T in `List<T>` in other languages like TypeScript
+
+## Constructed Types
+
+### Records
+
+```reason
+type record = {         /* New record type */
+    field1: bool,        /* Immutable field */
+    mutable field2: int, /* Mutable field */
+};
+```
+
+### Variants
+
+```reason
+type variant =           /* New variant type */
+  | Constant             /* Constant constructor */
+  | Param(string)        /* Constructor with argument */
+  | Pair(string, int)    /* Constructor with arguments */
+  | Gadt(int): variant   /* GADT constructor */
+```
+
+## Constructed Values
+
+```reason
+let r = { field1: true, field2: 10 }; /* Constructing a record */
+let r' = { ...r, field1: false }; /* Functional update */
+r.field2 := 20; /* Assignment to a mutable field */
+let v = Constant; /* Constructing a variant value */
+let v' = Param("hi")
+let v'' = Pair("hi", 10)
+```
+
+## References, Strings and Arrays
+
+```reason
+let x = ref(3); /* mutable integer reference */
+x := 10;        /* reference assignation */
+let a = x^;     /* reference access */
+"hello".[1]     /* string char access */
+[|3,1,4,5|][2]  /* array element access */
+let arr = [|1,2,3|]
+arr[0] = 100;   /* array element modification */
+```
+
+## Imports
+
+```reason
+open Belt.Option /* Global open */
+Js.( log("123") ) /* Local open */
+```
+
+## Functions
+
+```reason
+let f = x => ();       /* Function with one arg */
+let f = (x,y) => ();   /* Function with two args */
+let f = ((a,b)) => (); /* Function with a pair as an arg */
+x => true              /* Anonymous function */
+let f = fun            /* Function definition (by cases) */
+  | None => "Nothing"
+  | Some(x) => "A "++x;
+
+/* With labeled agrs */
+let f = (~left, ~right) => left + right;
+
+/* With optional arg */
+let f = (~left, ~right=?) => ();
+
+/* With default arg */
+let f = (~left, ~right=10) => left+right;
+```
+
+## Pattern mathcing
+
+```reason
+switch(expr) {
+  | pattern -> action
+  | pattern when bool -> action /* conditional case */
+  | _ => action                 /* default case */
+}
+
+/* Patterns */
+switch(...) {
+| Pair(x,y) -> ...     /* variant pattern */
+| { field: 12 } -> ...  /* record pattern */
+| [1,2,x] -> ...       /* list pattern */
+| [x, ..rest] -> ...   /* head/tail list pattern */
+| Some(x) as y -> ...  /* with extra binding */
+| 1 | 3 -> ...         /* or-pattern */
+| exception Exn -> ... /* match on exceptions */
+}
+```
+
+## Loops
+
+```reason
+for(i in 1 to 10) {
+  print_int(i);
+}
+```

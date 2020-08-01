@@ -1,9 +1,11 @@
 import Typography from "typography"
 import Wordpress2016 from "typography-theme-wordpress-2016"
 import "./code.css"
+import "./inter/inter.css"
 
 const headerStyle = {
-  fontWeight: 600,
+  fontWeight: 800,
+  fontFamily: "Inter, Georgia, sanf-serif",
 }
 
 Wordpress2016.overrideThemeStyles = () => {
@@ -21,8 +23,8 @@ Wordpress2016.overrideThemeStyles = () => {
 
 delete Wordpress2016.googleFonts
 
-Wordpress2016.headerFontFamily = ["Montserrat", "Georgia", "serif"]
-Wordpress2016.bodyFontFamily = ["Open Sans", "Georgia", "serif"]
+Wordpress2016.headerFontFamily = ["Inter", "Georgia", "serif"]
+Wordpress2016.bodyFontFamily = ["Inter", "Georgia", "serif"]
 
 const typography = new Typography(Wordpress2016)
 

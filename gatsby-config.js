@@ -1,32 +1,14 @@
 module.exports = {
-  pathPrefix: "/blog",
   siteMetadata: {
-    title: `My blog`,
-    author: `Olek Dubenko`,
-    description: "Blog about js, reason and react.",
-    siteUrl: `https://blog.dubenko.dev/`,
+    title: `Oleksandr Dubenko`,
+    author: `Oleksandr Dubenko`,
+    description: "Front-end and some other things",
+    siteUrl: `https://blog.dubenko.dev`,
     social: {
       twitter: `dubenko_`,
     },
   },
   plugins: [
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: "language-",
-              inlineCodeMarker: null,
-              aliases: {},
-              showLineNumbers: false,
-              noInlineHighlight: false,
-            },
-          },
-        ],
-      },
-    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -42,9 +24,19 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-mdx`,
       options: {
-        plugins: [
+        root: __dirname,
+        extensions: [".md", ".mdx"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+            },
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -57,7 +49,6 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
@@ -68,15 +59,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: `UA-138671614-1`,
       },
     },
-    `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `My Blog`,
+        short_name: `My Blog`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,

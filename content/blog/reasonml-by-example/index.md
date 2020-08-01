@@ -8,7 +8,7 @@ description: Facebook team did WHAT?
 
 I really want to share with you about this magnificent language [ReasonML](https://reasonml.github.io/).
 
-Before we start let me tell you that this is a gentle introduction for people mainly coming from javascript beackground (like me). I'm by no means an expert in reason or functional programming and if you are serious about learning reason you should checkout out (after reading this post of course) [official documentation](https://reasonml.github.io/docs/en/what-and-why) and [awesome book by Dr Axel Rauschmayer](http://reasonmlhub.com/exploring-reasonml/toc.html).
+Before we start let me tell you that this is a gentle introduction for people mainly coming from javascript background (like me). I'm by no means an expert in reason or functional programming and if you are serious about learning reason you should checkout out (after reading this post of course) [official documentation](https://reasonml.github.io/docs/en/what-and-why) and [awesome book by Dr Axel Rauschmayer](http://reasonmlhub.com/exploring-reasonml/toc.html).
 
 ## Intro
 
@@ -167,7 +167,7 @@ let quadrantFromPoint = (bbox, point: Vector.t) => {
   | (true, true) => SE
   | (true, false) => NE
   | (false, true) => SW
-  | (false, false) => SE
+  | (false, false) => NW
   };
 };
 ```
@@ -310,7 +310,7 @@ let rec insert = (tree: t, body: Body.t) =>
     let child = getNode(tree, quadrant);
 
     switch (child) {
-    | Some(node) => insert(node, body)
+    | Some(node) => setNode(tree, quadrant, insert(node, body))
     | None => setNode(tree, quadrant, createNode(tree.bbox, quadrant, body))
     };
   | None => {...tree, body: Some(body)}
@@ -321,7 +321,7 @@ Here comes the most interesting part: recursive function for inserting nodes. Lo
 
 In this function we need to find and/or create a node for body. We either find appropriate box with no body or recursively divide space until we do.
 
-## Compling
+## Compiling
 
 After running `bsb -make-world` it will compile every `.re` file to `.bs.js` and I encourage you to look at the produced code as it is quite readable and interesting. For example options' `None` value is just an `undefined` how cool is that?
 

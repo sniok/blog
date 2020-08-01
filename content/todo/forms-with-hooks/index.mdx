@@ -1,0 +1,21 @@
+---
+title: HForm - Composable Form Management with React Hooks
+date: "2019-05-06T11:07:16.785Z"
+description: big think about hooks and forms
+---
+
+> This is not a big shiny library that everyone should use. This is my thoughts on state management.
+
+## Why
+
+When working with some libraries and reading about others I noticed the same pattern. And they all felt wrong.
+
+After thinking about it I came up with my wish list:
+
+- you shouldn't pass "UI" component(input) to "logic" component(field), it should be the other way
+- we have hooks for reusable logic!
+- you shouldn't create `values` object for whole form. this hurts composability
+- 'form' is just a bunch of values, it shouldn't be a thing at all!
+- form management shouldn't handle all aspects of form creation — it's library not a framework
+
+##
