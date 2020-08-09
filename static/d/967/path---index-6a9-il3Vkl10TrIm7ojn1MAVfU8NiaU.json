@@ -1,1 +1,0 @@
-{"errors":[{"message":"Cannot query field \"slug\" on type \"MdxFrontmatter\".","locations":[{"line":12,"column":11}]}],"pageContext":{"isCreatedByStatefulCreatePages":true}}
